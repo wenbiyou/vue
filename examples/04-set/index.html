@@ -1,39 +1,37 @@
 <!--
  * @Author: ngz
- * @Date: 2022-11-28 13:55:49
+ * @Date: 2022-11-28 23:24:26
  * @LastEditors: ngz
- * @LastEditTime: 2022-11-28 18:38:35
+ * @LastEditTime: 2022-11-28 23:24:34
  * @Description: input Description
 -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Vue初始化</title>
+  <title>set</title>
 </head>
 <body>
-
   <div id="app">
-    <h1>hello Vue</h1>
-    {{msg}}
+    {{ obj.title }}
+    <hr>
+    {{ obj.name }}
+    <hr>
+    {{ arr }}
   </div>
 
   <script src="../../dist/vue.js"></script>
   <script>
-
     const vm = new Vue({
-      el: "#app",
-      data() {
-        return {
-          msg: 'hello Vue',
-          count: 10
-        }
+      el: '#app',
+      data: {
+        obj: {
+          title: 'Hello Vue'
+        },
+        arr: [1, 2, 3]
       }
     })
-
   </script>
-  
 </body>
 </html>
