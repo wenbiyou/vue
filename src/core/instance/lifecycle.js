@@ -2,7 +2,7 @@
  * @Author: ngz
  * @Date: 2022-11-27 23:16:11
  * @LastEditors: ngz
- * @LastEditTime: 2022-11-28 13:54:47
+ * @LastEditTime: 2022-11-29 09:32:52
  * @Description: input Description
  */
 /*
@@ -205,6 +205,7 @@ export function mountComponent (
     }
   }
 
+  // 创建渲染Watcher, expOrFn 为updateComponent
   // we set this to vm._watcher inside the watcher's constructor
   // since the watcher's initial patch may call $forceUpdate (e.g. inside child
   // component's mounted hook), which relies on vm._watcher being already defined

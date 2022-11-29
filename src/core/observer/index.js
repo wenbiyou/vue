@@ -60,6 +60,7 @@ export class Observer {
       this.observeArray(value)
     } else {
       // 对象的响应式处理
+      // 遍历对象中的每一个属性，转换成 getter/setter
       this.walk(value)
     }
   }
@@ -133,6 +134,7 @@ export function observe (value: any, asRootData: ?boolean): Observer | void {
     Object.isExtensible(value) &&
     !value._isVue
   ) {
+    // 创建一个Observer对象
     ob = new Observer(value)
   }
   if (asRootData && ob) {
@@ -178,7 +180,7 @@ export function defineReactive (
       // 如预定义的getter存在则 value 等于getter调用的函数
       // 否则直接赋予属性值
       const value = getter ? getter.call(obj) : val
-      // 如果存在当前依赖项目，即watcher对象，则建立依赖
+      // 如果存在当前依赖目标，即watcher对象，则建立依赖
       if (Dep.target) {
         // dep() 添加相互依赖
         // 1个组件对应一个watcher对象
@@ -198,7 +200,7 @@ export function defineReactive (
       return value
     },
     set: function reactiveSetter (newVal) {
-      // 如预定义的getter存在则 value 等于getter调用的函数
+      // 如预定义的getter存在则 value 等于getter调用的返回值
       // 否则直接赋予属性值
       const value = getter ? getter.call(obj) : val
       // 如果新值等于旧值或者新值旧值为null则不执行
@@ -210,7 +212,6 @@ export function defineReactive (
       if (process.env.NODE_ENV !== 'production' && customSetter) {
         customSetter()
       }
-
       // 没有setter直接返回
       // #7981: for accessor properties without setter
       if (getter && !setter) return
@@ -220,8 +221,9 @@ export function defineReactive (
       } else {
         val = newVal
       }
-      // 3. 如果新值是对象，观察子对象并且返回子对象的observer对象
+      // 3. 如果新值是对象，观察子对象并且返回 新值的observer对象
       childOb = !shallow && observe(newVal)
+      // 4. 发布通知
       dep.notify()
     }
   })
@@ -238,7 +240,7 @@ export function set (target: Array<any> | Object, key: any, val: any): any {
   ) {
     warn(`Cannot set reactive property on undefined, null, or primitive value: ${(target: any)}`)
   }
-  // 判断target是否是对象，key是否是合法的索引
+  // 判断target是否是数组，key是否是合法的索引
   if (Array.isArray(target) && isValidArrayIndex(key)) {
     target.length = Math.max(target.length, key)
     // 通过splice对key位置的元素进行替换

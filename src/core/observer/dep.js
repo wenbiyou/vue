@@ -1,3 +1,10 @@
+/*
+ * @Author: ngz
+ * @Date: 2022-11-27 23:16:11
+ * @LastEditors: ngz
+ * @LastEditTime: 2022-11-29 09:25:53
+ * @Description: input Description
+ */
 /* @flow */
 
 import Watcher from './watcher'
@@ -23,7 +30,7 @@ export default class Dep {
     this.id = uid++
     this.subs = []
   }
-  // 添加新的订阅者，Watcher对象
+  // 添加新的订阅者 Watcher对象
   addSub (sub: Watcher) {
     this.subs.push(sub)
   }
