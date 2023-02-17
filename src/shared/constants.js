@@ -15,8 +15,8 @@ export const LIFECYCLE_HOOKS = [
   'updated',
   'beforeDestroy',
   'destroyed',
-  'activated',
-  'deactivated',
+  'activated', // 缓存 keep-alive
+  'deactivated', // 组件被停用时调用 keep-alive
   'errorCaptured',
   'serverPrefetch'
 ]
